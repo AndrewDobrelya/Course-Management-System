@@ -36,5 +36,6 @@ namespace CourseManagementSystem.Models.DataModels
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<TeacherComment> TeacherComments { get; set; }
         public DbSet<Test> Tests { get; set; }
+        public DbSet<StudentConnection> StudentConnections { get; set; }
     }
 }

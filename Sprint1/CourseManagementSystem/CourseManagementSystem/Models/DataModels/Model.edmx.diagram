@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2cb95b94c3a041049b8af912faa40234" Name="Diagram1">
+      <Diagram DiagramId="2cb95b94c3a041049b8af912faa40234" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="CourseDataBaseModel.Answer" Width="1.5" PointX="12" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="CourseDataBaseModel.Category" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="CourseDataBaseModel.Course" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
@@ -28,6 +28,8 @@
         <AssociationConnector Association="CourseDataBaseModel.FK_Subscription_Student" ManuallyRouted="false" />
         <AssociationConnector Association="CourseDataBaseModel.FK_TeacherComment_StudentComment" ManuallyRouted="false" />
         <AssociationConnector Association="CourseDataBaseModel.FK_TeacherComment_Teacher" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CourseDataBaseModel.StudentConnection" Width="1.5" PointX="5.25" PointY="11.375" />
+        <AssociationConnector Association="CourseDataBaseModel.FK_StudentConnection_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

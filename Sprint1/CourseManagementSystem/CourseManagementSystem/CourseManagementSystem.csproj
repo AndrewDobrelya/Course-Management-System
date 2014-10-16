@@ -185,6 +185,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -217,6 +218,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\Partails\Student.cs" />
+    <Compile Include="Models\DataModels\Partails\Teacher.cs" />
+    <Compile Include="Models\DataModels\ProcessResult.cs" />
     <Compile Include="Models\DataModels\Question.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -224,6 +228,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\StudentComment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DataModels\StudentConnection.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataModels\Subscription.cs">
@@ -238,6 +245,19 @@
     <Compile Include="Models\DataModels\Test.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataModels\UserModel.cs" />
+    <Compile Include="Models\LogicModels\Managers\AuthentificationManager.cs" />
+    <Compile Include="Models\LogicModels\Managers\DataManager.cs" />
+    <Compile Include="Models\LogicModels\Managers\Manager.cs" />
+    <Compile Include="Models\LogicModels\Managers\StudentManager.cs" />
+    <Compile Include="Models\LogicModels\Managers\TeacherManager.cs" />
+    <Compile Include="Models\LogicModels\Managers\UserStatus.cs" />
+    <Compile Include="Models\LogicModels\Services\ConfirmationMailSender.cs" />
+    <Compile Include="Models\LogicModels\Services\ISender.cs" />
+    <Compile Include="Models\LogicModels\Services\Security.cs" />
+    <Compile Include="Models\LogicModels\Services\StaticSettings.cs" />
+    <Compile Include="Models\LogicModels\ViewModels\AjaxResponseModel.cs" />
+    <Compile Include="Models\LogicModels\ViewModels\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

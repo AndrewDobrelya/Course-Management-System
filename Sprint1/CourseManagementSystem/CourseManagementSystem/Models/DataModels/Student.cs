@@ -18,6 +18,7 @@ namespace CourseManagementSystem.Models.DataModels
         {
             this.StudentComments = new HashSet<StudentComment>();
             this.Subscriptions = new HashSet<Subscription>();
+            this.StudentConnections = new HashSet<StudentConnection>();
         }
     
         public int StudentId { get; set; }
@@ -31,5 +32,6 @@ namespace CourseManagementSystem.Models.DataModels
     
         public virtual ICollection<StudentComment> StudentComments { get; set; }
         public virtual ICollection<Subscription> Subscriptions { get; set; }
+        public virtual ICollection<StudentConnection> StudentConnections { get; set; }
     }
 }

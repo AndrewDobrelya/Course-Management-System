@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CourseDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CourseDataBaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Answer">
           <Key>
             <PropertyRef Name="AnswerId" />
@@ -74,6 +74,14 @@
           <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="CommentDate" Type="datetime" Nullable="false" />
           <Property Name="Text" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentConnection">
+          <Key>
+            <PropertyRef Name="StudentConnectionId" />
+          </Key>
+          <Property Name="StudentConnectionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="StudentId" Type="int" />
         </EntityType>
         <EntityType Name="Subscription">
           <Key>
@@ -209,6 +217,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudentConnection_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="StudentConnection" Type="Self.StudentConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentConnection">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Subscription_Course">
           <End Role="Course" Type="Self.Course" Multiplicity="1" />
           <End Role="Subscription" Type="Self.Subscription" Multiplicity="*" />
@@ -265,6 +285,7 @@
           <EntitySet Name="Question" EntityType="Self.Question" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StudentComment" EntityType="Self.StudentComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentConnection" EntityType="Self.StudentConnection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TeacherComment" EntityType="Self.TeacherComment" Schema="dbo" store:Type="Tables" />
@@ -301,6 +322,10 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="StudentComment" EntitySet="StudentComment" />
           </AssociationSet>
+          <AssociationSet Name="FK_StudentConnection_Student" Association="Self.FK_StudentConnection_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentConnection" EntitySet="StudentConnection" />
+          </AssociationSet>
           <AssociationSet Name="FK_Subscription_Course" Association="Self.FK_Subscription_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="Subscription" EntitySet="Subscription" />
@@ -318,8 +343,7 @@
             <End Role="TeacherComment" EntitySet="TeacherComment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CourseDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -395,6 +419,7 @@
           <Property Name="Activation" Type="Int32" Nullable="false" />
           <NavigationProperty Name="StudentComments" Relationship="Self.FK_StudentComment_Student" FromRole="Student" ToRole="StudentComment" />
           <NavigationProperty Name="Subscriptions" Relationship="Self.FK_Subscription_Student" FromRole="Student" ToRole="Subscription" />
+          <NavigationProperty Name="StudentConnections" Relationship="CourseDataBaseModel.FK_StudentConnection_Student" FromRole="Student" ToRole="StudentConnection" />
         </EntityType>
         <EntityType Name="StudentComment">
           <Key>
@@ -659,7 +684,33 @@
             <End Role="Teacher" EntitySet="Teachers" />
             <End Role="TeacherComment" EntitySet="TeacherComments" />
           </AssociationSet>
+          <EntitySet Name="StudentConnections" EntityType="CourseDataBaseModel.StudentConnection" />
+          <AssociationSet Name="FK_StudentConnection_Student" Association="CourseDataBaseModel.FK_StudentConnection_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentConnection" EntitySet="StudentConnections" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="StudentConnection">
+          <Key>
+            <PropertyRef Name="StudentConnectionId" />
+          </Key>
+          <Property Name="StudentConnectionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="StudentId" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="CourseDataBaseModel.FK_StudentConnection_Student" FromRole="StudentConnection" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK_StudentConnection_Student">
+          <End Type="CourseDataBaseModel.Student" Role="Student" Multiplicity="0..1" />
+          <End Type="CourseDataBaseModel.StudentConnection" Role="StudentConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentConnection">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -782,6 +833,15 @@
               <MappingFragment StoreEntitySet="Test">
                 <ScalarProperty Name="LastLectureId" ColumnName="LastLectureId" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentConnections">
+            <EntityTypeMapping TypeName="CourseDataBaseModel.StudentConnection">
+              <MappingFragment StoreEntitySet="StudentConnection">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="StudentConnectionId" ColumnName="StudentConnectionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
