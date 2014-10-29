@@ -24,5 +24,15 @@ namespace CourseManagementSystem.Models
 
         public DbSet<Course> Courses { get; set; }
 
+        public DbSet<Answer> Answer { get; set; }
+
+        public DbSet<Lecture> Lecture { get; set; }
+
+        public DbSet<Question> Question { get; set; }
+
+        public DbSet<Subscription> Subscription { get; set; }
+
+        public DbSet<Test> Test { get; set; }
+
     }
 }

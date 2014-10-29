@@ -9,7 +9,7 @@ using System.Web;
 
 namespace CourseManagementSystem.Models
 {
-    public class Course
+    public partial class Course
     {
         
         public int id { get; set; }
@@ -21,16 +21,24 @@ namespace CourseManagementSystem.Models
         public string description { get; set; }
 
         [Display(Name = "Дата публикации")]
-        public DateTime PublishDate { get; set; }
+        public System.DateTime PublishDate { get; set; }
+
+        [Display(Name = "Оценка")]
+        public Nullable<double> Estimation { get; set; }
+
+        [Display(Name = "Количество оценок")]
+        public Nullable<int> EstimationCount { get; set; }
 
         [Display(Name = "Категория")]
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
 
         [Display(Name = "Автор")]
         public ApplicationUser Author { get; set; }
 
         [Display(Name = "Статус")]
         public bool activated { get; set; }
+
+        public virtual Category Category { get; set; }        
 
 
     }
