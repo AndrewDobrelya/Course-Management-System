@@ -91,8 +91,7 @@ namespace CourseManagementSystem.Controllers
                 if (result.Succeeded)
                 {
                     await AddUserToRoleAsync(user, model.Role);
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Account");
                 }
                 else
                 {

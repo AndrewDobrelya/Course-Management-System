@@ -30,17 +30,50 @@ namespace CourseManagementSystem.Models
         public Nullable<int> EstimationCount { get; set; }
 
         [Display(Name = "Категория")]
-        public int CategoryId { get; set; }
+        public virtual Category Category { get; set; }
 
         [Display(Name = "Автор")]
         public ApplicationUser Author { get; set; }
 
         [Display(Name = "Статус")]
         public bool activated { get; set; }
-
-        public virtual Category Category { get; set; }        
+ 
 
 
     }
+    public partial class AddCourseModel
+    {
+        public AddCourseModel(Course course) 
+        {
+            id = course.id;
+            name = course.name;
+            description = course.description;
+            category_id = course.Category.id;
+        
+        }
+
+        public AddCourseModel()
+        {
+
+        }
+
+
+        public int id { get; set; }
+
+        [Display(Name = "Название")]
+        public string name { get; set; }
+
+        [Display(Name = "Описание")]
+        public string description { get; set; }
+
+        [Display(Name = "Категория")]
+        public int category_id { get; set; }
+
+
+
+
+
+    }
+
 
 }

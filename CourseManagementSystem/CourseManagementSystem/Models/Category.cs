@@ -12,13 +12,14 @@ namespace CourseManagementSystem.Models
 {
     public partial class Category
     {
+        public int id { get; set; }
+
         public Category()
         {
             this.Course = new HashSet<Course>();
         }
 
-        public int id { get; set; }
-        [Display(Name = "Название")]
+        [Display(Name = "Категория")]
         public string Name { get; set; }
 
         public virtual ICollection<Course> Course { get; set; }

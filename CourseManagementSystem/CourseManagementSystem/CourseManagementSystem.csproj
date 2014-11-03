@@ -193,12 +193,15 @@
     <Compile Include="Migrations\201410231630063_5.Designer.cs">
       <DependentUpon>201410231630063_5.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411021705517_6.cs" />
+    <Compile Include="Migrations\201411021705517_6.Designer.cs">
+      <DependentUpon>201411021705517_6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\CoursesInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Question.cs" />
@@ -281,24 +284,35 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201410221421084_InitialCreate.resx">
       <DependentUpon>201410221421084_InitialCreate.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410221722588_Email.resx">
       <DependentUpon>201410221722588_Email.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410231448294_1.resx">
       <DependentUpon>201410231448294_1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410231518365_2.resx">
       <DependentUpon>201410231518365_2.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410231607133_3.resx">
       <DependentUpon>201410231607133_3.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410231621119_4.resx">
       <DependentUpon>201410231621119_4.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410231630063_5.resx">
       <DependentUpon>201410231630063_5.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411021705517_6.resx">
+      <DependentUpon>201411021705517_6.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

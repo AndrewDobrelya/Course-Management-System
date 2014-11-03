@@ -7,7 +7,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using CourseManagementSystem.Models;
-using CourseManagementSystem.DAL;
 
 namespace CourseManagementSystem
 {
@@ -19,7 +18,6 @@ namespace CourseManagementSystem
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer<ApplicationDbContext>(new CoursesInitializer());
         }
     }
 }

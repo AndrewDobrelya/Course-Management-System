@@ -1,9 +1,10 @@
 ﻿@using CourseManagementSystem.Models
 
-@model CourseManagementSystem.Models.Course
+@model AddCourseModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Создать курс";
+    var category = new ApplicationDbContext().Categories;
 }
 
 <h2>Create</h2>
@@ -34,10 +35,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => Model.Category, new SelectList(Model.Category., "ContribId", "Value"))
-                @Html.ValidationMessageFor(model => model.description)
+            @Html.LabelFor(model => model.category_id, new { @class = "control-label col-md-2" })
+            <div class="col-md-10"> 
+                @Html.DropDownListFor(model => model.category_id, new SelectList(category, "id", "Name"))
+                @Html.ValidationMessageFor(model => model.category_id)
             </div>
         </div>
 

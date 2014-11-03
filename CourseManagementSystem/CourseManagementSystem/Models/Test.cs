@@ -11,6 +11,8 @@ namespace CourseManagementSystem.Models
 {
     public partial class Test
     {
+
+        public int Id { get; set; }
         public Test()
         {
             this.Question = new HashSet<Question>();
