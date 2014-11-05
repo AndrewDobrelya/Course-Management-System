@@ -1,0 +1,15 @@
+h1,#panel{
+    text-align:center;
+}
+html, body {
+     height: 100%;
+ }
+ #inputSizeHeigth{
+     width:50px;
+ }
+  #inputSizeWidth{
+     width:50px;
+ }
+ #settingsForm{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
+ }
