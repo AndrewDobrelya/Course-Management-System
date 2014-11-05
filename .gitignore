@@ -148,7 +148,6 @@ csx/
 
 # Windows Store app package directory
 AppPackages/
-
 # Others
 sql/
 *.Cache
@@ -173,9 +172,6 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# SQL Server files
-*.mdf
-*.ldf
 
 # Business Intelligence projects
 *.rdl.data

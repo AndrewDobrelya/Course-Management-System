@@ -162,6 +162,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LecturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,15 +212,33 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\CreateLecture\jscolor\arrow.gif" />
+    <Content Include="App_Data\CreateLecture\jscolor\cross.gif" />
+    <Content Include="App_Data\CreateLecture\jscolor\demo.html" />
+    <Content Include="App_Data\CreateLecture\jscolor\hs.png" />
+    <Content Include="App_Data\CreateLecture\jscolor\hv.png" />
+    <Content Include="App_Data\CreateLecture\jscolor\jscolor.js" />
+    <Content Include="App_Data\CreateLecture\res\Center.png" />
+    <Content Include="App_Data\CreateLecture\res\CenterB.png" />
+    <Content Include="App_Data\CreateLecture\res\InWidth.png" />
+    <Content Include="App_Data\CreateLecture\res\InWidthB.png" />
+    <Content Include="App_Data\CreateLecture\res\Left.png" />
+    <Content Include="App_Data\CreateLecture\res\LeftB.png" />
+    <Content Include="App_Data\CreateLecture\res\Right.png" />
+    <Content Include="App_Data\CreateLecture\res\RightB.png" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CreateLecture\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Data\CreateLecture\jscolor\Thumbs.db" />
+    <Content Include="App_Data\CreateLecture\res\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CreateLecture\Engine.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -270,10 +289,13 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Home\_MyCoursesButtonPartial.cshtml" />
+    <Content Include="Views\Lectures\Create.cshtml" />
+    <Content Include="Views\Lectures\Delete.cshtml" />
+    <Content Include="Views\Lectures\Details.cshtml" />
+    <Content Include="Views\Lectures\Edit.cshtml" />
+    <Content Include="Views\Lectures\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
