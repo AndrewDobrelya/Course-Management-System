@@ -17,8 +17,6 @@ namespace CourseManagementSystem.Models
         }
 
         public int QuestionId { get; set; }
-        public int LastLectureId { get; set; }
-        [Display(Name = "Номер")]
         public int Number { get; set; }
         [Display(Name = "Текст")]
         public string Text { get; set; }
