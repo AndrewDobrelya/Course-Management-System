@@ -233,7 +233,6 @@ C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\Co
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csprojResolveAssemblyReference.cache
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations.InitialCreate.resources
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations.Email.resources
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._1.resources
@@ -241,7 +240,8 @@ C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\Co
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._3.resources
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._4.resources
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._5.resources
+C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._6.resources
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csproj.GenerateResource.Cache
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.dll
 C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.pdb
-C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._6.resources
+C:\Users\Gramm\Desktop\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csprojResolveAssemblyReference.cache

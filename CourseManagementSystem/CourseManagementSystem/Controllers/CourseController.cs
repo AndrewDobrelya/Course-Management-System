@@ -22,10 +22,23 @@ namespace CourseManagementSystem.Controllers
         // GET: /Course/
 
         [Authorize(Roles = "teacher")]
-        public ActionResult Index()
+        public ActionResult Teacher()
         {
-            return View(db.Courses.ToList());
+            
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            List<Course> FullList = db.Courses.ToList();
+            List<Course> AuthorList = new List<Course>();
+            foreach(Course course in FullList)
+            {
+                if(course.Author == userManager.FindById(User.Identity.GetUserId()))
+                {
+                    AuthorList.Add(course);
+                }
+            }
+            return View(AuthorList);
         }
+
+
 
         // GET: /Course/Details/5
         public ActionResult Details(int? id)
