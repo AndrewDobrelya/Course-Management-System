@@ -162,6 +162,7 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LecturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -211,6 +212,22 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\CreateLecture\Engine.js" />
+    <Content Include="resources\CreateLecture\jscolor\arrow.gif" />
+    <Content Include="resources\CreateLecture\jscolor\cross.gif" />
+    <Content Include="resources\CreateLecture\jscolor\demo.html" />
+    <Content Include="resources\CreateLecture\jscolor\hs.png" />
+    <Content Include="resources\CreateLecture\jscolor\hv.png" />
+    <Content Include="resources\CreateLecture\jscolor\jscolor.js" />
+    <Content Include="resources\CreateLecture\res\Center.png" />
+    <Content Include="resources\CreateLecture\res\CenterB.png" />
+    <Content Include="resources\CreateLecture\res\InWidth.png" />
+    <Content Include="resources\CreateLecture\res\InWidthB.png" />
+    <Content Include="resources\CreateLecture\res\Left.png" />
+    <Content Include="resources\CreateLecture\res\LeftB.png" />
+    <Content Include="resources\CreateLecture\res\Right.png" />
+    <Content Include="resources\CreateLecture\res\RightB.png" />
+    <Content Include="Content\CreateLecture\Style.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -219,6 +236,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="resources\CreateLecture\res\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -270,6 +288,11 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
     <Content Include="Views\Home\_MyCoursesButtonPartial.cshtml" />
+    <Content Include="Views\Lectures\Create.cshtml" />
+    <Content Include="Views\Lectures\Delete.cshtml" />
+    <Content Include="Views\Lectures\Details.cshtml" />
+    <Content Include="Views\Lectures\Edit.cshtml" />
+    <Content Include="Views\Lectures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
