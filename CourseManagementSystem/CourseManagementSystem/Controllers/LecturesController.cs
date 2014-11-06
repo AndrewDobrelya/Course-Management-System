@@ -13,12 +13,14 @@ namespace CourseManagementSystem.Controllers
     public class LecturesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private int courseId;
 
         // GET: Lectures
-        public ActionResult Index()
+        public ActionResult Index([Bind(Include = "id")] Course course)
         {
-            var lecture = db.Lecture.Include(l => l.Course);
-            return View(lecture.ToList());
+            courseId = course.id;
+            var lecture = db.Lecture.Include(l => l.Course).Where(l => l.Course.id == courseId);
+            return PartialView(lecture.ToList());
         }
 
         // GET: Lectures/Details/5

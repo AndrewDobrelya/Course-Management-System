@@ -24,18 +24,11 @@ namespace CourseManagementSystem.Controllers
         [Authorize(Roles = "teacher")]
         public ActionResult Teacher()
         {
-            
+
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
-            List<Course> FullList = db.Courses.ToList();
-            List<Course> AuthorList = new List<Course>();
-            foreach(Course course in FullList)
-            {
-                if(course.Author == userManager.FindById(User.Identity.GetUserId()))
-                {
-                    AuthorList.Add(course);
-                }
-            }
-            return View(AuthorList);
+            string user = User.Identity.GetUserId();
+            var course = db.Courses.Include(l => l.Author).Where(l => l.Author.Id == user);
+            return View(course.ToList());
         }
 
 
@@ -79,7 +72,7 @@ namespace CourseManagementSystem.Controllers
                 course.Author = userManager.FindById(User.Identity.GetUserId());
                 db.Courses.Add(course);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Teacher");
             }
 
             return View(courseview);
@@ -116,7 +109,7 @@ namespace CourseManagementSystem.Controllers
 
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Teacher");
             }
             return View(courseview);
         }
@@ -144,7 +137,7 @@ namespace CourseManagementSystem.Controllers
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Teacher");
         }
 
         protected override void Dispose(bool disposing)

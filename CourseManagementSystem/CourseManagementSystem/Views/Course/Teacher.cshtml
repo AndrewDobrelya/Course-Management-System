@@ -7,8 +7,9 @@
 <h2>Мои курсы</h2>
 
 <p>
-    @Html.ActionLink("Создать новый курс", "Create")
+    @Html.ActionLink("Создать новый", "Create")
 </p>
+@if (Model.Count() > 0) { 
 <table class="table">
     <tr>
         <th>
@@ -54,3 +55,11 @@
 }
 
 </table>
+}
+else
+{
+    
+    <hr />
+    <p style="color:#808080; text-align:center">
+        У вас пока ещё нет курсов</p>
+}
