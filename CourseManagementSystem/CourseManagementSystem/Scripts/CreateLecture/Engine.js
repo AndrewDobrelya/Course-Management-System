@@ -16,6 +16,7 @@ iDoc.body.onclick = fillUI;
 iDoc.body.onkeyup = fillUI;
 var isSettingsVideo = false;
 var tempSelection = null;
+document.body.onclick = hideCover;
 function rgbToHex(r, g, b) {
     return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
@@ -42,8 +43,7 @@ function changeI() {
     else changeItalicButton(false);
 }
 
-function changeU()
-{
+function changeU() {
     if (document.getElementById("under").innerHTML == "U") {
         changeUnderlineButton(true);
     }
@@ -123,8 +123,7 @@ function fillColors(fontColor, fontBackgroundColor) {
     }
 }
 
-function fillFontInfo(font, fontName)
-{
+function fillFontInfo(font, fontName) {
     var str;
     while (font.tagName != "HTML") {
         str = font.style.getPropertyValue("font-size");
@@ -187,29 +186,29 @@ function fillPosition(position) {
                 break;
             }
             else
-            if (position.style.getPropertyValue("text-align") == "center") {
-                document.getElementById("center").src = "/../../resources/CreateLecture/res/CenterB.png";
-                document.getElementById("left").src = "/../../resources/CreateLecture/res/Left.png";
-                document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
-                document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidth.png";
-                break;
-            }
-            else
-            if (position.style.getPropertyValue("text-align") == "justify") {
-                document.getElementById("center").src = "/../../resources/CreateLecture/res/Center.png";
-                document.getElementById("left").src = "/../../resources/CreateLecture/res/Left.png";
-                document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
-                document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidthB.png";
-                break;
-            }
-            else
-            if (position.style.getPropertyValue("text-align") == "left") {
-                document.getElementById("center").src = "/../../resources/CreateLecture/res/Center.png";
-                document.getElementById("left").src = "/../../resources/CreateLecture/res/LeftB.png";
-                document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
-                document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidth.png";
-                break;
-            }
+                if (position.style.getPropertyValue("text-align") == "center") {
+                    document.getElementById("center").src = "/../../resources/CreateLecture/res/CenterB.png";
+                    document.getElementById("left").src = "/../../resources/CreateLecture/res/Left.png";
+                    document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
+                    document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidth.png";
+                    break;
+                }
+                else
+                    if (position.style.getPropertyValue("text-align") == "justify") {
+                        document.getElementById("center").src = "/../../resources/CreateLecture/res/Center.png";
+                        document.getElementById("left").src = "/../../resources/CreateLecture/res/Left.png";
+                        document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
+                        document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidthB.png";
+                        break;
+                    }
+                    else
+                        if (position.style.getPropertyValue("text-align") == "left") {
+                            document.getElementById("center").src = "/../../resources/CreateLecture/res/Center.png";
+                            document.getElementById("left").src = "/../../resources/CreateLecture/res/LeftB.png";
+                            document.getElementById("right").src = "/../../resources/CreateLecture/res/Right.png";
+                            document.getElementById("inwidth").src = "/../../resources/CreateLecture/res/InWidth.png";
+                            break;
+                        }
         }
         else {
             document.getElementById("center").src = "/../../resources/CreateLecture/res/Center.png";
@@ -223,7 +222,7 @@ function fillPosition(position) {
 
 function setBold() {
     iWin.document.execCommand("bold", null, "");
-    if(getSelectedText() == "") {
+    if (getSelectedText() == "") {
         changeB();
     }
     else {
@@ -234,7 +233,7 @@ function setBold() {
 
 function setItal() {
     iWin.document.execCommand("italic", null, "");
-    if(getSelectedText() == "") {
+    if (getSelectedText() == "") {
         changeI();
     }
     else {
@@ -245,7 +244,7 @@ function setItal() {
 
 function setUnderline() {
     iWin.document.execCommand("underline", null, "");
-    if(getSelectedText() == "") {
+    if (getSelectedText() == "") {
         changeU();
     }
     else {
@@ -373,52 +372,52 @@ function setFontColor(color) {
 function setFontBGColor(color) {
     iWin.document.execCommand("BackColor", null, color);
 }
-function openSettings(isVideo){
-        document.getElementById('cover').style.display = '';
-        tempSelection = iWin.getSelection();
-        isSettingsVideo = isVideo;
-        if(isVideo){
-            document.getElementById('inputSizeWidth').value = 640;
-            document.getElementById('inputSizeHeigth').value = 390;
-        }
-        document.getElementById('settingsForm').style.left = document.getElementById('insertPictureButton').offsetLeft+'px';
-        document.getElementById('settingsForm').style.top = document.getElementById('insertPictureButton').offsetTop 
-        + document.getElementById('insertPictureButton').offsetHeight + 5 + 'px';
-        document.getElementById('settingsForm').style.display = '';
-        document.getElementById('urlInput').value = "";
-        document.getElementById('urlInput').focus();
-    
+function openSettings(isVideo) {
+    document.getElementById('cover').style.display = '';
+    tempSelection = iWin.getSelection();
+    isSettingsVideo = isVideo;
+    if (isVideo) {
+        document.getElementById('inputSizeWidth').value = 640;
+        document.getElementById('inputSizeHeigth').value = 390;
+    }
+    document.getElementById('settingsForm').style.left = document.getElementById('insertPictureButton').offsetLeft + 'px';
+    document.getElementById('settingsForm').style.top = document.getElementById('insertPictureButton').offsetTop
+    + document.getElementById('insertPictureButton').offsetHeight + 5 + 'px';
+    document.getElementById('settingsForm').style.display = '';
+    document.getElementById('urlInput').value = "";
+    document.getElementById('urlInput').focus();
+
 }
 
 function changeInputSize() {
     var url = document.getElementById('urlInput').value;
     var image = new Image();
     image.src = url;
-    image.onload = function() {
+    image.onload = function () {
         document.getElementById('inputSizeWidth').value = image.width;
         document.getElementById('inputSizeHeigth').value = image.height;
     }
 }
 
-function insertPicture(selection,urlImage,width,height,float) {
+function insertPicture(selection, urlImage, width, height, float) {
     //var fileurl = document.getElementById("insertPicture").value;
     //iWin.document.execCommand("InsertImage", null, fileurl);
     //alert(document.getElementById('insertPictureButton').offsetLeft);
     var img = document.createElement('img');
-    img.setAttribute("src",urlImage);
-    img.setAttribute("width",width);
-    img.setAttribute("height",height);
-    img.setAttribute("onclick","openSettings(false, false)");
+    img.setAttribute("src", urlImage);
+    img.setAttribute("width", width);
+    img.setAttribute("height", height);
+    img.setAttribute("onclick", "openSettings(false, false)");
     img.style.float = float;
     var selectedElement = null;
-    if(selection.focusNode.tagName == "BODY")
-    selectedElement = selection.focusNode;
-    else 
-    selectedElement = selection.focusNode.parentNode;
+    if (selection.focusNode.tagName == "BODY")
+        selectedElement = selection.focusNode;
+    else
+        selectedElement = selection.focusNode.parentNode;
     selectedElement.appendChild(img);
 }
 
-function insertVideo(selection,urlVideo,width,height,float) {
+function insertVideo(selection, urlVideo, width, height, float) {
     var url = urlVideo;
     var iFrame = document.createElement('iframe');
     var temp = '';
@@ -429,42 +428,41 @@ function insertVideo(selection,urlVideo,width,height,float) {
     for (var i = temp.length - 1; i >= 0; i--) {
         url += temp[i];
     }
-    var src = '//www.youtube.com/embed/'+url;
-    iFrame.setAttribute("width",width);
-    iFrame.setAttribute("height",height);
-    iFrame.setAttribute("src",src);
-    iFrame.setAttribute("frameborder",0);
-    iFrame.setAttribute("allowfullscreen",'');
+    var src = '//www.youtube.com/embed/' + url;
+    iFrame.setAttribute("width", width);
+    iFrame.setAttribute("height", height);
+    iFrame.setAttribute("src", src);
+    iFrame.setAttribute("frameborder", 0);
+    iFrame.setAttribute("allowfullscreen", '');
     iFrame.style.float = float;
     var selectedElement = null;
-    if(selection.focusNode.tagName == "BODY")
-    selectedElement = selection.focusNode;
-    else 
-    selectedElement = selection.focusNode.parentNode;
+    if (selection.focusNode.tagName == "BODY")
+        selectedElement = selection.focusNode;
+    else
+        selectedElement = selection.focusNode.parentNode;
     selectedElement.appendChild(iFrame);
     var Doc = (isGecko) ? iFrame.contentDocument : iFrame.document;
     Doc.designMode = "off";
     void 0;
     Doc.close();
-   
+
 }
 function applySettings() {
     var float;
-    if(document.getElementsByClassName('floatRadioButton')[0].checked)
-    {
+    if (document.getElementsByClassName('floatRadioButton')[0].checked) {
         float = document.getElementsByClassName('floatRadioButton')[0].value;
-    }else if(document.getElementsByClassName('floatRadioButton')[1].checked){
+    } else if (document.getElementsByClassName('floatRadioButton')[1].checked) {
         float = document.getElementsByClassName('floatRadioButton')[1].value;
-    }else{
+    } else {
         float = document.getElementsByClassName('floatRadioButton')[2].value;
     }
-    if(isSettingsVideo){
+    if (isSettingsVideo) {
         insertVideo(tempSelection,
                     document.getElementById('urlInput').value,
                     document.getElementById('inputSizeWidth').value,
                     document.getElementById('inputSizeHeigth').value
-                    ,float);
-    }else{
+                    , float);
+    } else {
         insertPicture(tempSelection,
                     document.getElementById('urlInput').value,
                     document.getElementById('inputSizeWidth').value,
@@ -475,11 +473,14 @@ function applySettings() {
 }
 
 function closeSettings() {
+    document.getElementById('regDiv').style.display = 'none';
     document.getElementById('settingsForm').style.display = 'none';
     document.getElementById('cover').style.display = 'none';
 }
 
-function save() {
-    document.getElementById("inputText").value = iframe.contentWindow.document.body.innerHTML;
-    document.getElementById("postForm").submit();
+function create() {
+    document.getElementById('cover').style.display = '';
+    document.getElementById('regDiv').style.display = '';
+
+    
 }
