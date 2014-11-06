@@ -25,7 +25,7 @@
                 @if (User.IsInRole("teacher")) { 
                 <ul class="nav navbar-nav">
 
-                    <li>@Html.ActionLink("Мои курсы", "Index", "Course")</li>
+                    <li>@Html.ActionLink("Мои курсы", "Teacher", "Course")</li>
                 </ul>
                  }
                 @Html.Partial("_LoginPartial")
@@ -35,10 +35,12 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
-        </footer>
-    </div>
+        <div class="navbar-fixed-bottom" style="text-align: center; background-color: #696969; vertical-align: middle; line-height: 40px; ">
+            <footer>
+                <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
+            </footer>
+        </div>
+     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

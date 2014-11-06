@@ -22,10 +22,16 @@ namespace CourseManagementSystem.Controllers
         // GET: /Course/
 
         [Authorize(Roles = "teacher")]
-        public ActionResult Index()
+        public ActionResult Teacher()
         {
-            return View(db.Courses.ToList());
+
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            string user = User.Identity.GetUserId();
+            var course = db.Courses.Include(l => l.Author).Where(l => l.Author.Id == user);
+            return View(course.ToList());
         }
+
+
 
         // GET: /Course/Details/5
         public ActionResult Details(int? id)
@@ -66,7 +72,7 @@ namespace CourseManagementSystem.Controllers
                 course.Author = userManager.FindById(User.Identity.GetUserId());
                 db.Courses.Add(course);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Teacher");
             }
 
             return View(courseview);
@@ -103,7 +109,7 @@ namespace CourseManagementSystem.Controllers
 
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Teacher");
             }
             return View(courseview);
         }
@@ -131,7 +137,7 @@ namespace CourseManagementSystem.Controllers
             Course course = db.Courses.Find(id);
             db.Courses.Remove(course);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Teacher");
         }
 
         protected override void Dispose(bool disposing)
