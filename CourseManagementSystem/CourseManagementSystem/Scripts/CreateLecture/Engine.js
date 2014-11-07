@@ -479,6 +479,8 @@ function closeSettings() {
 }
 
 function create() {
+    document.getElementById("inputText").value = iframe.contentWindow.document.body.innerHTML;
+    document.getElementById("inputName").focus();
     document.getElementById('cover').style.display = '';
     document.getElementById('regDiv').style.display = '';
 
