@@ -23,6 +23,13 @@ namespace CourseManagementSystem.Controllers
             return PartialView(lecture.ToList());
         }
 
+        public ActionResult EditList([Bind(Include = "id")] Course course)
+        {
+            courseId = course.id;
+            var lecture = db.Lecture.Include(l => l.Course).Where(l => l.Course.id == courseId);
+            return PartialView(lecture.ToList());
+        }
+
         // GET: Lectures/Details/5
         public ActionResult Details(int? id)
         {

@@ -18,8 +18,15 @@ namespace CourseManagementSystem.Controllers
     {
 
         private ApplicationDbContext db = new ApplicationDbContext();
+
        
         // GET: /Course/
+        public ActionResult List()
+        {
+            var course = db.Courses.Where(l => l.activated == true);
+            return View(course.ToList());
+        }
+
 
         [Authorize(Roles = "teacher")]
         public ActionResult Teacher()
@@ -48,7 +55,23 @@ namespace CourseManagementSystem.Controllers
             return View(course);
         }
 
+        public ActionResult View(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Course course = db.Courses.Find(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            return View(course);
+        }
+
         // GET: /Course/Create
+
+        [Authorize(Roles = "teacher")]
         public ActionResult Create()
         {
             return View();
@@ -57,6 +80,8 @@ namespace CourseManagementSystem.Controllers
         // POST: /Course/Create
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AddCourseModel courseview)
@@ -79,6 +104,8 @@ namespace CourseManagementSystem.Controllers
         }
 
         // GET: /Course/Edit/5
+
+        [Authorize(Roles = "teacher")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,6 +123,8 @@ namespace CourseManagementSystem.Controllers
         // POST: /Course/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [Authorize(Roles = "teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(AddCourseModel courseview)
@@ -115,6 +144,8 @@ namespace CourseManagementSystem.Controllers
         }
 
         // GET: /Course/Delete/5
+
+        [Authorize(Roles = "teacher")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -130,6 +161,8 @@ namespace CourseManagementSystem.Controllers
         }
 
         // POST: /Course/Delete/5
+
+        [Authorize(Roles = "teacher")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
