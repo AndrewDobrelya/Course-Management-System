@@ -13,12 +13,13 @@ namespace CourseManagementSystem.Controllers
     public class LecturesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        private int courseId;
+        private static int courseId;
 
         // GET: Lectures
         public ActionResult Index([Bind(Include = "id")] Course course)
         {
             courseId = course.id;
+            ViewBag.CourseId = course.id;
             var lecture = db.Lecture.Include(l => l.Course).Where(l => l.Course.id == courseId);
             return PartialView(lecture.ToList());
         }
@@ -62,10 +63,10 @@ namespace CourseManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                lecture.Course = db.Courses.Find(ViewBag.CourseId);
+                lecture.Course = db.Courses.Find(courseId);
                 db.Lecture.Add(lecture);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Course/Details/" + courseId);
             }
 
             ViewBag.CourseId = new SelectList(db.Courses, "id", "name", lecture.CourseId);

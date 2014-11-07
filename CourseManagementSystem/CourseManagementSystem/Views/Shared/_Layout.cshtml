@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body>
+<body style=" padding-bottom: 70px;">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,10 +22,6 @@
                 @Html.ActionLink("Course Management System", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-
-                    <li>@Html.ActionLink("Все курсы", "List", "Course")</li>
-                </ul>
                 @if (User.IsInRole("teacher")) { 
                 <ul class="nav navbar-nav">
 
@@ -38,12 +34,11 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <div class="navbar-fixed-bottom" style="text-align: center; background-color: #696969; vertical-align: middle; line-height: 40px; ">
-            <footer>
+        <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" style="background-color:#222222; border-bottom:none;">
+            <footer class="container-fluid" style="text-align:center;color:#ffffff;">
                 <p>&copy; @DateTime.Now.Year – приложение ASP.NET</p>
             </footer>
-        </div>
+        </nav>
      </div>
 
     @Scripts.Render("~/bundles/jquery")
