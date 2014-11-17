@@ -7,21 +7,21 @@
     var category = new ApplicationDbContext().Categories;
 }
 
-<h2>Create</h2>
+<h2>Создать курс</h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Course</h4>
+        <h4>Введите информацию о курсе</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
             @Html.LabelFor(model => model.name, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.name)
+                @Html.TextBoxFor(model => model.name, new { @class = " col-md-4" })
                 @Html.ValidationMessageFor(model => model.name)
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.description, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.description)
+                @Html.TextAreaFor(model => model.description, new { @class = "col-md-4" })
                 @Html.ValidationMessageFor(model => model.description)
             </div>
         </div>
@@ -37,19 +37,19 @@
         <div class="form-group">
             @Html.LabelFor(model => model.category_id, new { @class = "control-label col-md-2" })
             <div class="col-md-10"> 
-                @Html.DropDownListFor(model => model.category_id, new SelectList(category, "id", "Name"))
+                @Html.DropDownListFor(model => model.category_id, new SelectList(category, "id", "Name"), new { @class = "col-md-4" })
                 @Html.ValidationMessageFor(model => model.category_id)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Создать" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Teacher")
+    @Html.ActionLink("Вернуться к списку", "Teacher")
 </div>

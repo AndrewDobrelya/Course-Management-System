@@ -33,7 +33,7 @@ namespace CourseManagementSystem.Models
         public virtual Category Category { get; set; }
 
         [Display(Name = "Автор")]
-        public ApplicationUser Author { get; set; }
+        public virtual ApplicationUser Author { get; set; }
 
         [Display(Name = "Статус")]
         public bool activated { get; set; }

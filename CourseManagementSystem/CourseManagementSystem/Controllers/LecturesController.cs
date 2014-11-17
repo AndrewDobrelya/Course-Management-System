@@ -93,14 +93,17 @@ namespace CourseManagementSystem.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,CourseId,Name,Text,Number")] Lecture lecture)
         {
             if (ModelState.IsValid)
             {
+                lecture.Course = db.Courses.Find(courseId);
+                lecture.CourseId = courseId;
                 db.Entry(lecture).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Course/Details/" + courseId);
             }
             ViewBag.CourseId = new SelectList(db.Courses, "id", "name", lecture.CourseId);
             return View(lecture);
@@ -129,7 +132,7 @@ namespace CourseManagementSystem.Controllers
             Lecture lecture = db.Lecture.Find(id);
             db.Lecture.Remove(lecture);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/Course/Details/" + courseId);
         }
 
         protected override void Dispose(bool disposing)
@@ -139,6 +142,11 @@ namespace CourseManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult RedirectToCourseView()
+        {
+            return Redirect("/Course/Details/" + courseId);
         }
     }
 }
