@@ -93,11 +93,14 @@ namespace CourseManagementSystem.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "Id,CourseId,Name,Text,Number")] Lecture lecture)
         {
             if (ModelState.IsValid)
             {
+                lecture.Course = db.Courses.Find(courseId);
+                lecture.CourseId = courseId;
                 db.Entry(lecture).State = EntityState.Modified;
                 db.SaveChanges();
                 return Redirect("/Course/Details/" + courseId);
