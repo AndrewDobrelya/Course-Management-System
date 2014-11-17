@@ -9,12 +9,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using CourseManagementSystem.Models;
+using System.Data.Entity;
+using System.Net.Mail;
 
 namespace CourseManagementSystem.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
         public AccountController()
             : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
         {
@@ -26,11 +29,8 @@ namespace CourseManagementSystem.Controllers
         }
         private async Task AddUserToRoleAsync(ApplicationUser user, string role)
         {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
                 var result = await userManager.AddToRoleAsync(user.Id, role);
-            }
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -54,7 +54,7 @@ namespace CourseManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
+                if (user != null  && user.IsConfirmed)
                 {
                     await SignInAsync(user, model.RememberMe);
                     return RedirectToLocal(returnUrl);
@@ -68,6 +68,40 @@ namespace CourseManagementSystem.Controllers
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
         }
+
+        private string CreateToken()
+        {
+            return ShortGuid.NewShortGuid();
+        }
+
+        private void SendEmail(string mail, string subject, string body)
+        {
+
+            SmtpClient ss = new SmtpClient("smtp.gmail.com", 587);
+            ss.EnableSsl = true;
+            ss.Timeout = 10000;
+            ss.DeliveryMethod = SmtpDeliveryMethod.Network;
+            ss.UseDefaultCredentials = false;
+            ss.Credentials = new System.Net.NetworkCredential("course.management.system.help@gmail.com", "80624921905");
+
+
+            MailMessage message = new MailMessage();
+            //Setting From , To
+            message.From = new MailAddress("course.management.system.help@gmail.com", "Course");
+            message.To.Add(new MailAddress(mail));
+            message.Subject = subject;
+            message.Body = body;
+
+            ss.Send(message);
+
+        }
+
+        private void SendEmailConfirmation(string to, string username, string confirmationToken)
+        {
+            string link = Url.Action("ConfirmAccount", "Account", new { un = username, rt = confirmationToken }, "http");
+            SendEmail(to, "Подтверждение регистрации", link);
+        }
+  
 
         //
         // GET: /Account/Register
@@ -86,11 +120,14 @@ namespace CourseManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+
+                string confirmationToken = CreateToken();
+                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, ConfirmationToken = confirmationToken, IsConfirmed = false };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await AddUserToRoleAsync(user, model.Role);
+                    SendEmailConfirmation(model.Email, model.UserName, confirmationToken);
                     return RedirectToAction("Login", "Account");
                 }
                 else
@@ -101,6 +138,112 @@ namespace CourseManagementSystem.Controllers
 
             // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             return View(model);
+        }
+
+        private bool ConfirmAccount(string confirmationToken)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            ApplicationUser user = context.Users.SingleOrDefault(u => u.ConfirmationToken == confirmationToken);
+            if (user != null)
+            {
+                user.IsConfirmed = true;
+                DbSet<ApplicationUser> dbSet = context.Set<ApplicationUser>();
+                dbSet.Attach(user);
+                context.Entry(user).State = EntityState.Modified;
+                context.SaveChanges();
+
+                return true;
+            }
+            return false;
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterConfirmation(string Id)
+        {
+            if (ConfirmAccount(Id))
+            {
+                return RedirectToAction("ConfirmationSuccess");
+            }
+            return RedirectToAction("ConfirmationFailure");
+        }
+
+        [AllowAnonymous]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost, AllowAnonymous, ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(string UserName)
+        {
+           // проверяем существование пользователя
+           var user = UserManager.FindByName(UserName);
+           if (user == null)
+           {
+               TempData["Message"] = "User Not exist.";
+           }
+           else
+           {
+               // генерируем маркер пароля
+               ResetToken token = new ResetToken() { Token = CreateToken(), UserName = UserName };
+
+                 db.ResetToken.Add(token);
+                 db.SaveChanges();
+                // создаем урл с маркером пароля
+                var resetLink = Url.Action("ResetPassword", "Account", new { un = UserName, rt = token.Token }, "http");
+              // получим e-mail прользователя
+                var email = db.Users.Where(x => x.UserName == UserName).Select(x => x.Email).FirstOrDefault();
+                // отсылаем email
+                string subject = "Смена пароля";
+                string body = "Для смены пароля перейдите по ссылке " + resetLink;
+                try
+                {
+                   SendEmail(email, subject, body);
+                   TempData["Message"] = "Сообщение со ссылкой для восстановления пароля выслано на электронную почту.";
+                }
+                catch (Exception ex)
+                {
+                    TempData["Message"] = "Error occured while sending email." + ex.Message;
+                }
+            }
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult ResetPassword(string un, string rt)
+        {
+            // ищем пользователя с заданным именем
+            ApplicationUser userProfile = db.Users.FirstOrDefault(x => x.UserName.Equals(un));
+            ResetToken resetToken = db.ResetToken.FirstOrDefault(x => x.Token.Equals(rt));
+            if (userProfile == null || resetToken == null || !(resetToken.UserName == userProfile.UserName))
+            {
+                return RedirectToAction("BadLink");
+            }
+
+            string newpassword = new Random(8).Next(99999999).ToString();
+
+            if (!(UserManager.RemovePassword(UserManager.FindByName(un).Id)  == IdentityResult.Success))
+            {
+                return RedirectToAction("BadLink");
+            }
+            UserManager.AddPassword(UserManager.FindByName(un).Id, newpassword);
+
+            db.ResetToken.Remove(resetToken);
+            db.SaveChanges();
+            // высылаем письмо с новым паролем
+            string subject = "Новый пароль";
+            string body = "Новый пароль для доступа в систему: " + newpassword;
+            try
+            {
+                SendEmail(userProfile.Email, subject, body);
+                ViewBag.Message = "Письмо с паролем выслано.";
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Возникла ошибка при отсылки письма. " + ex.Message;
+            }
+
+            return View();
         }
 
         //

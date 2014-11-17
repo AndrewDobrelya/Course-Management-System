@@ -1,13 +1,13 @@
 ﻿@model CourseManagementSystem.Models.Lecture
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробнее о лекции";
 }
 
-<h2>Details</h2>
+<h2>Подробнее</h2>
 
 <div>
-    <h4>Lecture</h4>
+    <h4>О лекции</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "EditList")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Вернуться к списку", "RedirectToCourseView")
 </p>

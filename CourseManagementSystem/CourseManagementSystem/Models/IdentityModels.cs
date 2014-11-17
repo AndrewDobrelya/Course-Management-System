@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -10,11 +11,21 @@ namespace CourseManagementSystem.Models
     {
 
         [Required]
-        [MailNotExists]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string ConfirmationToken { get; set; }
+        public bool IsConfirmed { get; set; }
+
+
+    }
+
+    public class ResetToken
+    {
+
+        [Key]
+        public string Token { get; set; }
+        public string UserName { get; set; }
 
     }
 
@@ -39,20 +50,18 @@ namespace CourseManagementSystem.Models
 
         public DbSet<Test> Test { get; set; }
 
+        public DbSet<ResetToken> ResetToken { get; set; }
+
+        public DbSet<Mark> Mark { get; set; }
     }
 
-    public class MailNotExists : ValidationAttribute
+    public class UniqueEmailAttribute : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        public override bool IsValid(object value)
         {
             ApplicationDbContext db = new ApplicationDbContext();
-
-            var user = db.Users.FirstOrDefaultAsync(u => u.Email == (string)value);
-
-            if (user == null)
-                return ValidationResult.Success;
-            else
-                return new ValidationResult("Электронная почта используется другим пользователем");
+            var userWithTheSameEmail = db.Users.FirstOrDefaultAsync(u => u.Email == (string)value);
+            return userWithTheSameEmail == null;
         }
     }
 }

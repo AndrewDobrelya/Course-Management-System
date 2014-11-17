@@ -100,7 +100,7 @@ namespace CourseManagementSystem.Controllers
             {
                 db.Entry(lecture).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/Course/Details/" + courseId);
             }
             ViewBag.CourseId = new SelectList(db.Courses, "id", "name", lecture.CourseId);
             return View(lecture);
@@ -129,7 +129,7 @@ namespace CourseManagementSystem.Controllers
             Lecture lecture = db.Lecture.Find(id);
             db.Lecture.Remove(lecture);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/Course/Details/" + courseId);
         }
 
         protected override void Dispose(bool disposing)
@@ -139,6 +139,11 @@ namespace CourseManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult RedirectToCourseView()
+        {
+            return Redirect("/Course/Details/" + courseId);
         }
     }
 }
