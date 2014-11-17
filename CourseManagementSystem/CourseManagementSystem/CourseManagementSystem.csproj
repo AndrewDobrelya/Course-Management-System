@@ -163,6 +163,8 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LecturesController.cs" />
+    <Compile Include="Controllers\QuestionsController.cs" />
+    <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -198,6 +200,10 @@
     <Compile Include="Migrations\201411021705517_6.Designer.cs">
       <DependentUpon>201411021705517_6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411070624353_7.cs" />
+    <Compile Include="Migrations\201411070624353_7.Designer.cs">
+      <DependentUpon>201411070624353_7.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -212,6 +218,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CreateTest\Style.css" />
     <Content Include="Scripts\CreateLecture\Engine.js" />
     <Content Include="resources\CreateLecture\jscolor\arrow.gif" />
     <Content Include="resources\CreateLecture\jscolor\cross.gif" />
@@ -238,6 +245,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="resources\CreateLecture\res\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\CreateTest\Engine.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -293,6 +301,18 @@
     <Content Include="Views\Lectures\Details.cshtml" />
     <Content Include="Views\Lectures\Edit.cshtml" />
     <Content Include="Views\Lectures\Index.cshtml" />
+    <Content Include="Views\Questions\Create.cshtml" />
+    <Content Include="Views\Questions\Delete.cshtml" />
+    <Content Include="Views\Questions\Details.cshtml" />
+    <Content Include="Views\Questions\Edit.cshtml" />
+    <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Tests\Create.cshtml" />
+    <Content Include="Views\Tests\Delete.cshtml" />
+    <Content Include="Views\Tests\Details.cshtml" />
+    <Content Include="Views\Tests\Edit.cshtml" />
+    <Content Include="Views\Tests\Index.cshtml" />
+    <Content Include="Views\Tests\CreateTest.cshtml" />
+    <Content Include="Views\Tests\Some.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -336,6 +356,9 @@
     <EmbeddedResource Include="Migrations\201411021705517_6.resx">
       <DependentUpon>201411021705517_6.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411070624353_7.resx">
+      <DependentUpon>201411070624353_7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
