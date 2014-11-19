@@ -16,7 +16,7 @@ iDoc.body.onclick = fillUI;
 iDoc.body.onkeyup = fillUI;
 var isSettingsVideo = false;
 var tempSelection = null;
-document.body.onclick = hideCover;
+//document.getElementById('frameIdJs').contentDocument.body.onpaste = pasteJs;
 function rgbToHex(r, g, b) {
     return componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
@@ -476,6 +476,7 @@ function closeSettings() {
     document.getElementById('regDiv').style.display = 'none';
     document.getElementById('settingsForm').style.display = 'none';
     document.getElementById('cover').style.display = 'none';
+    document.getElementById('preview').style.display = 'none';
 }
 
 function create() {
@@ -483,6 +484,60 @@ function create() {
     document.getElementById("inputName").focus();
     document.getElementById('cover').style.display = '';
     document.getElementById('regDiv').style.display = '';
-
+}
+function htmlEditor() {
     
+    if(document.getElementById('modeButton').innerHTML == "HTML")
+    {
+        document.getElementById('frameId').style.display = 'none';
+        document.getElementById('textAreaJs').style.display = '';
+        document.getElementById('modeButton').innerHTML = "Editor";
+        var temp = document.getElementsByClassName('noJs');
+        for (var i = 0; i < temp.length; i++) {
+            temp[i].disabled = true;
+        }
+        document.getElementById('fontColor').disabled = true;
+        document.getElementById('bgColor').disabled = true;
+
+        var content = iframe.contentDocument.body.innerHTML;
+        var readableContent = "";
+        for (var i = 0,j=0; i < content.length; i++,j++) {
+            if (content[i] == '>') { 
+                readableContent += content[i]
+                readableContent += '\n';
+            } else if (content[i] == '<' && i!=0 &&content[i - 1] != '>' && content[i - 1] != '\n') {
+                readableContent += '\n';
+                readableContent += content[i] 
+            }else
+            {
+                readableContent += content[i]
+            }
+        }
+        document.getElementById('textAreaJs').value = readableContent;
+    }
+    else if (document.getElementById('modeButton').innerHTML == "Editor") {
+        document.getElementById('frameId').style.display = '';
+        document.getElementById('textAreaJs').style.display = 'none';
+        document.getElementById('modeButton').innerHTML = "HTML";
+        
+        var temp = document.getElementsByClassName('noJs');
+        for (var i = 0; i < temp.length; i++) {
+            temp[i].disabled = false;
+        }
+        document.getElementById('fontColor').disabled = false;
+        document.getElementById('bgColor').disabled = false;
+
+        iframe.contentDocument.body.innerHTML = document.getElementById('textAreaJs').value;
+    }
+}
+function preview() {
+    document.getElementById('cover').style.display = '';
+    //document.write("hello");
+    document.getElementById('preview').style.display = '';
+    if (document.getElementById('modeButton').innerHTML == "HTML") {
+        document.getElementById('previewFrame').contentDocument.body.innerHTML = iframe.contentDocument.body.innerHTML;
+
+    } else {
+        document.getElementById('previewFrame').contentDocument.body.innerHTML = document.getElementById('textAreaJs').value;
+    }
 }
