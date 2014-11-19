@@ -19,6 +19,7 @@ namespace CourseManagementSystem.Controllers
         public ActionResult Index([Bind(Include = "id")] Course course)
         {
             courseId = course.id;
+            ViewBag.CourseId = course.id;
             var lecture = db.Lecture.Include(l => l.Course).Where(l => l.Course.id == courseId);
             return PartialView(lecture.ToList());
         }
@@ -131,7 +132,7 @@ namespace CourseManagementSystem.Controllers
             Lecture lecture = db.Lecture.Find(id);
             db.Lecture.Remove(lecture);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/Course/Details/" + courseId);
         }
 
         protected override void Dispose(bool disposing)
@@ -141,6 +142,11 @@ namespace CourseManagementSystem.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult RedirectToCourseView()
+        {
+            return Redirect("/Course/Details/" + courseId);
         }
     }
 }

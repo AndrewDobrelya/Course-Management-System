@@ -1,0 +1,84 @@
+﻿@model CourseManagementSystem.Models.Question
+@Scripts.Render("~/scripts/CreateTest/Engine.js")
+@Styles.Render("~/Content/CreateTest/Style.css")
+
+@{
+    ViewBag.Title = "Create";  
+}
+
+<h2>Create</h2>
+<div>
+    <select id="typeSel" onchange="changeButtons()" class="control-label col-md-2">
+        <option>Один варинт ответа</option>
+        <option>Несколько вариантов ответа</option>
+    </select>
+</div><br />
+<form action="/Questions/Create" method="post" class="test">
+    <div>
+        <div class="p">
+            @Html.Label("Текст вопроса", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextArea("Text", htmlAttributes: new { @class = "txtareasq" })
+        </div>
+
+        <div class="p">
+            @Html.Label("Ответ 1", htmlAttributes: new { @class = "control-label col-md-2" })
+            <input type="radio" id="answer" name="answers" value="0" />
+            @Html.TextArea("names", htmlAttributes: new { @class = "txtareas" })
+        </div>
+
+        <div class="p">
+            @Html.Label("Ответ 2", htmlAttributes: new { @class = "control-label col-md-2" })
+            <input type="radio" id="answer" name="answers" value="1" />
+            @Html.TextArea("names", htmlAttributes: new { @class = "txtareas" })
+        </div>
+
+        <div class="p">
+            @Html.Label("Ответ 3", htmlAttributes: new { @class = "control-label col-md-2" })
+            <input type="radio" id="answer" name="answers" value="2" />
+            @Html.TextArea("names", htmlAttributes: new { @class = "txtareas" })
+        </div>
+
+        <div class="p">
+            @Html.Label("Ответ 4", htmlAttributes: new { @class = "control-label col-md-2" })
+            <input type="radio" id="answer" name="answers" value="3" />
+            @Html.TextArea("names", htmlAttributes: new { @class = "txtareas" })
+        </div>
+    
+        <div>
+            <div>
+                <input class="btn btn-default control-label col-md-2 " type="submit" value="Создать" />
+            </div>
+        </div>
+    </div>
+</form>
+@*
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Question</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Text, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Text)
+                    @Html.ValidationMessageFor(model => model.Text)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+*@
+<br /><br /><br />
+<div>
+    @Html.ActionLink("Вернуться к списку тестов", "Index", "Tests")
+</div>
+

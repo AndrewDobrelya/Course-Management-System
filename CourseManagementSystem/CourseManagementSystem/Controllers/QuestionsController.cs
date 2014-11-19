@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using CourseManagementSystem.Models;
+
+namespace CourseManagementSystem.Controllers
+{
+    public class QuestionsController : Controller
+    {
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private static int testId;
+
+        // GET: Questions
+        public ActionResult Index()
+        {
+            return View(db.Question.ToList());
+        }
+
+        // GET: Questions/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = db.Question.Find(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View(question);
+        }
+
+        // GET: Questions/Create
+        public ActionResult Create([Bind(Include = "Id")] Test test)
+        {
+
+            testId = test.Id;
+            return View();
+        }
+
+        // POST: Questions/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        // [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Text")] Question question, List<string> names, List<string> answers)
+        {
+            if (ModelState.IsValid)
+            {
+                question.Test = db.Test.Find(testId);
+                
+                db.Question.Add(question);
+                for (int i = 0; i < 4; i++)
+                {
+                    bool b = false;
+                    for (int j = 0; j < answers.Count; j++)
+                    {
+                        if (answers[j] == i.ToString())
+                        {
+                            b = true;
+                        }
+                    }
+                    db.Answer.Add(new Answer() { IsTrue = b, Question = question, QuestionId = question.QuestionId, 
+                        Text = names[i] });
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index","Tests");
+            }
+
+            return View(question);
+        }
+
+        // GET: Questions/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = db.Question.Find(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View(question);
+        }
+
+        // POST: Questions/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "QuestionId,Text")] Question question)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(question).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(question);
+        }
+
+        // GET: Questions/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Question question = db.Question.Find(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+            return View(question);
+        }
+
+        // POST: Questions/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Question question = db.Question.Find(id);
+            Answer[] a = db.Answer.ToArray<Answer>();
+            for (int i = 0; i < a.Count(); i++)
+            {
+                if (a[i].QuestionId == id)
+                {
+                    db.Answer.Remove(a[i]);
+                }
+            }
+            db.SaveChanges();
+            db.Question.Remove(question);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
