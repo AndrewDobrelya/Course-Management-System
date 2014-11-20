@@ -486,9 +486,8 @@ function create() {
     document.getElementById('regDiv').style.display = '';
 }
 function htmlEditor() {
-    
-    if(document.getElementById('modeButton').innerHTML == "HTML")
-    {
+
+    if (document.getElementById('modeButton').innerHTML == "HTML") {
         document.getElementById('frameId').style.display = 'none';
         document.getElementById('textAreaJs').style.display = '';
         document.getElementById('modeButton').innerHTML = "Editor";
@@ -501,15 +500,14 @@ function htmlEditor() {
 
         var content = iframe.contentDocument.body.innerHTML;
         var readableContent = "";
-        for (var i = 0,j=0; i < content.length; i++,j++) {
-            if (content[i] == '>') { 
+        for (var i = 0, j = 0; i < content.length; i++, j++) {
+            if (content[i] == '>') {
                 readableContent += content[i]
                 readableContent += '\n';
-            } else if (content[i] == '<' && i!=0 &&content[i - 1] != '>' && content[i - 1] != '\n') {
+            } else if (content[i] == '<' && i != 0 && content[i - 1] != '>' && content[i - 1] != '\n') {
                 readableContent += '\n';
-                readableContent += content[i] 
-            }else
-            {
+                readableContent += content[i]
+            } else {
                 readableContent += content[i]
             }
         }
@@ -519,15 +517,16 @@ function htmlEditor() {
         document.getElementById('frameId').style.display = '';
         document.getElementById('textAreaJs').style.display = 'none';
         document.getElementById('modeButton').innerHTML = "HTML";
-        
+
         var temp = document.getElementsByClassName('noJs');
         for (var i = 0; i < temp.length; i++) {
             temp[i].disabled = false;
         }
         document.getElementById('fontColor').disabled = false;
         document.getElementById('bgColor').disabled = false;
-
-        iframe.contentDocument.body.innerHTML = document.getElementById('textAreaJs').value;
+        var content = document.getElementById('textAreaJs').value;
+        content = content.replace(/(\n(\r)?)/g, ' ');
+        iframe.contentDocument.body.innerHTML = noBreak;
     }
 }
 function preview() {
