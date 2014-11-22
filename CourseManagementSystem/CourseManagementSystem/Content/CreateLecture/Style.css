@@ -10,7 +10,15 @@ html, body {
 #inputSizeHeigth {
     width: 50px;
 }
-
+#preview{
+       position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    overflow-x:auto;
+}
 #inputSizeWidth {
     width: 50px;
 }
@@ -19,12 +27,13 @@ html, body {
     box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Параметры тени */
 }
 
-#frameId {
+#frameId,#textAreaJs {
+    border-width:1px;
     margin-top: 5px;
     box-shadow: 3px 3px 10px rgba(0,0,0,0.5); /* Параметры тени */
 }
-body{
-    min-width:500px;
+.body-content{
+    height:100%;
 }
 .parent {
     width: 100%;
