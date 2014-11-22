@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "QuestionsList";
+    List<CourseManagementSystem.Models.Question> questions = ViewBag.Questions;
+    //   List<CourseManagementSystem.Models.Answer> answers = ViewBag.AnswersToList;
+    int answersCount = 4;
+    int currQuest = 0;
+    int testId = ViewBag.TestId;
+}
+
+<h2>QuestionsList</h2>
+
+@model IEnumerable<CourseManagementSystem.Models.Test>
+
+
+<table class="table">
+    <tr>
+        <td>
+            <h4>Текст вопроса</h4>
+        </td>
+        <td>
+            <h4>Варианты ответа</h4>
+        </td>
+    </tr>
+
+</table>
+
+@if (questions.Count() > 0)
+{
+    <table class="table">
+        @foreach (var item in questions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+
+                </td>
+                <td>
+                    @for (int i = 0; i < answersCount; i++)
+                    {
+                        <br />
+                        @Html.DisplayFor(modelItem => questions[currQuest].Answer.ToList().ElementAt(i).Text) 
+                    }
+                    @{ currQuest++; }
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+else
+{
+    <hr />
+    <p style="color:#808080; text-align:left">
+        Здесь пока ещё нет вопросов
+    </p>
+}
+
+<div class="col-md-9">
+
+    <p>
+        @Html.ActionLink("Добавить вопрос", "Create", "Questions", new { Id = testId }, null)
+    </p>
+</div>
+
+<div class="col-md-9">
+
+    <p>
+        @Html.ActionLink("Добавить вопрос", "Create", "Questions", new { Id = testId }, null)
+    </p>
+</div>
