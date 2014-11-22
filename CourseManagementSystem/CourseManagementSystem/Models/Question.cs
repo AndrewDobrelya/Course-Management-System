@@ -15,6 +15,7 @@ namespace CourseManagementSystem.Models
         {
             this.Answer = new HashSet<Answer>();
         }
+
         public int QuestionId { get; set; }
         [Display(Name = "Текст")]
         public string Text { get; set; }

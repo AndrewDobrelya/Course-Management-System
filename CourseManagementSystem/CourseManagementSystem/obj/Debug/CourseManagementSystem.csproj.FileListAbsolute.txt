@@ -405,7 +405,6 @@ C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagement
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ru\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csprojResolveAssemblyReference.cache
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations.InitialCreate.resources
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations.Email.resources
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._1.resources
@@ -508,3 +507,4 @@ C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSy
 C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csproj.GenerateResource.Cache
 C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.dll
 C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.pdb
+C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csprojResolveAssemblyReference.cache

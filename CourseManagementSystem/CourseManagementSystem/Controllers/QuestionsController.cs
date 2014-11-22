@@ -70,7 +70,8 @@ namespace CourseManagementSystem.Controllers
                         Text = names[i] });
                 }
                 db.SaveChanges();
-                return RedirectToAction("Index","Tests");
+
+                return RedirectToAction("QuestionsList", "Tests", new  { lectId= db.Test.Find(testId).Lecture.Id });
             }
 
             return View(question);

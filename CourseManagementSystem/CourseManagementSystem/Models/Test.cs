@@ -18,6 +18,7 @@ namespace CourseManagementSystem.Models
             this.Question = new HashSet<Question>();
         }
 
+        [Display(Name = "Имя лекции")]
         public int LastLectureId { get; set; }
         [Display(Name = "Номер")]
         public int Number { get; set; }

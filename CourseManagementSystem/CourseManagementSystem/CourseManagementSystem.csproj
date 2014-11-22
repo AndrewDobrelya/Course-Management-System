@@ -326,12 +326,15 @@
     <Content Include="Views\Tests\Details.cshtml" />
     <Content Include="Views\Tests\Edit.cshtml" />
     <Content Include="Views\Tests\Index.cshtml" />
-    <Content Include="Views\Tests\Some.cshtml" />
     <Content Include="Views\Questions\Create.cshtml" />
     <Content Include="Views\Questions\Delete.cshtml" />
     <Content Include="Views\Questions\Details.cshtml" />
     <Content Include="Views\Questions\Edit.cshtml" />
     <Content Include="Views\Questions\Index.cshtml" />
+    <Content Include="Views\Lectures\TestAdd.cshtml" />
+    <Content Include="Views\Tests\EditList.cshtml" />
+    <Content Include="Views\Tests\QuestionsList.cshtml" />
+    <Content Include="Views\Tests\Certificate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

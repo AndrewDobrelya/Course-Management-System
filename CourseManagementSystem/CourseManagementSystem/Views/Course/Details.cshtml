@@ -37,8 +37,18 @@
     </div>
     <p>
         @Html.ActionLink("Редактировать", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Добавить тест", "CreateTest", "Tests", new { id = Model.id }, null) |
         @Html.ActionLink("Вернуться к списку", "Teacher")
     </p>
-
 </div>
+<div class="col-md-8">
+    <p>
+        @Html.Action("EditList", "Lectures", new { courceId = Model.id })
+    </p>
+</div>
+<div class="col-md-9">
 
+    <p>
+        @Html.Action("EditList", "Tests", new { courseId = Model.id })
+    </p>
+</div>

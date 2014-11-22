@@ -11,6 +11,7 @@ namespace CourseManagementSystem.Models
 {
     public partial class Answer
     {
+
         public int Id { get; set; }
         public Nullable<int> QuestionId { get; set; }
         [Display(Name = "Текст")]
