@@ -38,6 +38,13 @@ namespace CourseManagementSystem.Controllers
             return View(course.ToList());
         }
 
+        public ActionResult Search(Search search)
+        {
+            var course = db.Courses.Where(l => l.name == search.keywords && l.Category.id == search.category_id);
+            return View(course.ToList());
+        }
+
+
 
 
         // GET: /Course/Details/5

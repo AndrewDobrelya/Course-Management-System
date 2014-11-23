@@ -1,0 +1,16 @@
+﻿@using CourseManagementSystem.Models
+@model Search
+@{
+    var category = new ApplicationDbContext().Categories;
+}
+@using (Html.BeginForm("Search", "Course", Model, FormMethod.Post))
+{
+    <div style="background-color:#2f2f2f">
+        <ul class="nav navbar-nav">
+        <li>@Html.DropDownListFor(model => model.category_id, new SelectList(category, "id", "Name"))</li>
+        <li>@Html.TextBoxFor(model => model.keywords)</li>
+        <li><input type="submit" value="Найти" /></li>
+        </ul>
+    </div>
+}
+
