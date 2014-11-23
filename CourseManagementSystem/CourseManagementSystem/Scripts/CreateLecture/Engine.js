@@ -4,6 +4,9 @@ var iframe = (isGecko) ? document.getElementById("frameId") : frames["frameId"];
 var iWin = (isGecko) ? iframe.contentWindow : iframe.window;
 var iDoc = (isGecko) ? iframe.contentDocument : iframe.document;
 var iHTML = "<html><head></head><body style='background-color: white;font-size: 14pt;'></body></html>";
+var isLoadedFromDisk = false;
+var isImage = false;
+var loadedFile = "";
 var isFilledB;
 var isFilledI;
 var isFilledU;
@@ -373,6 +376,7 @@ function setFontBGColor(color) {
     iWin.document.execCommand("BackColor", null, color);
 }
 function openSettings(isVideo) {
+    isLoadedFromDisk = false;
     document.getElementById('cover').style.display = '';
     tempSelection = iWin.getSelection();
     isSettingsVideo = isVideo;
@@ -380,13 +384,16 @@ function openSettings(isVideo) {
         document.getElementById('inputSizeWidth').value = 640;
         document.getElementById('inputSizeHeigth').value = 390;
     }
+    else {
+        document.getElementById('inputSizeWidth').value = 100;
+        document.getElementById('inputSizeHeigth').value = 100;
+    }
     document.getElementById('settingsForm').style.left = document.getElementById('insertPictureButton').offsetLeft + 'px';
     document.getElementById('settingsForm').style.top = document.getElementById('insertPictureButton').offsetTop
     + document.getElementById('insertPictureButton').offsetHeight + 5 + 'px';
     document.getElementById('settingsForm').style.display = '';
     document.getElementById('urlInput').value = "";
     document.getElementById('urlInput').focus();
-
 }
 
 function changeInputSize() {
@@ -419,34 +426,55 @@ function insertPicture(selection, urlImage, width, height, float) {
 
 function insertVideo(selection, urlVideo, width, height, float) {
     var url = urlVideo;
-    var iFrame = document.createElement('iframe');
-    var temp = '';
-    for (var i = url.length - 1; url[i] != '=' && url[i] != '/'; i--) {
-        temp += url[i];
+    if (-1 < url.indexOf('youtube.')) {
+        var iFrame = document.createElement('iframe');
+        var temp = '';
+        for (var i = url.length - 1; url[i] != '=' && url[i] != '/'; i--) {
+            temp += url[i];
+        }
+        url = '';
+        for (var i = temp.length - 1; i >= 0; i--) {
+            url += temp[i];
+        }
+        var src = '//www.youtube.com/embed/' + url;
+        iFrame.setAttribute("width", width);
+        iFrame.setAttribute("height", height);
+        iFrame.setAttribute("src", src);
+        iFrame.setAttribute("frameborder", 0);
+        iFrame.setAttribute("allowfullscreen", '');
+        iFrame.style.float = float;
+        var selectedElement = null;
+        if (selection.focusNode.tagName == "BODY")
+            selectedElement = selection.focusNode;
+        else
+            selectedElement = selection.focusNode.parentNode;
+        selectedElement.appendChild(iFrame);
+        var Doc = (isGecko) ? iFrame.contentDocument : iFrame.document;
+        Doc.designMode = "off";
+        void 0;
+        Doc.close();
     }
-    url = '';
-    for (var i = temp.length - 1; i >= 0; i--) {
-        url += temp[i];
+    else {
+        var selectedElement = null;
+        if (tempSelection.focusNode.tagName == "BODY")
+            selectedElement = tempSelection.focusNode;
+        else
+            selectedElement = tempSelection.focusNode.parentNode;
+        var temp1 = document.createElement('br');
+        selectedElement.appendChild(temp1);
+        var Video = document.createElement('video');
+        Video.setAttribute("width", document.getElementById('inputSizeWidth').value);
+        Video.setAttribute("src", url);
+        Video.setAttribute("height", document.getElementById('inputSizeHeigth').value);
+        Video.setAttribute("controls", "");
+        Video.style.float = float;
+        selectedElement.appendChild(Video);
+        var Doc = (isGecko) ? Video.contentDocument : Video.document;
+        Video.designMode = "off";
+        selectedElement.appendChild(temp1);
     }
-    var src = '//www.youtube.com/embed/' + url;
-    iFrame.setAttribute("width", width);
-    iFrame.setAttribute("height", height);
-    iFrame.setAttribute("src", src);
-    iFrame.setAttribute("frameborder", 0);
-    iFrame.setAttribute("allowfullscreen", '');
-    iFrame.style.float = float;
-    var selectedElement = null;
-    if (selection.focusNode.tagName == "BODY")
-        selectedElement = selection.focusNode;
-    else
-        selectedElement = selection.focusNode.parentNode;
-    selectedElement.appendChild(iFrame);
-    var Doc = (isGecko) ? iFrame.contentDocument : iFrame.document;
-    Doc.designMode = "off";
-    void 0;
-    Doc.close();
-
 }
+
 function applySettings() {
     var float;
     if (document.getElementsByClassName('floatRadioButton')[0].checked) {
@@ -456,20 +484,142 @@ function applySettings() {
     } else {
         float = document.getElementsByClassName('floatRadioButton')[2].value;
     }
-    if (isSettingsVideo) {
-        insertVideo(tempSelection,
-                    document.getElementById('urlInput').value,
-                    document.getElementById('inputSizeWidth').value,
-                    document.getElementById('inputSizeHeigth').value
-                    , float);
-    } else {
-        insertPicture(tempSelection,
-                    document.getElementById('urlInput').value,
-                    document.getElementById('inputSizeWidth').value,
-                    document.getElementById('inputSizeHeigth').value,
-                    float);
+    if (document.getElementById('urlInput').value != "" && !isLoadedFromDisk) {
+        if (isSettingsVideo) {
+            insertVideo(tempSelection,
+                        document.getElementById('urlInput').value,
+                        document.getElementById('inputSizeWidth').value,
+                        document.getElementById('inputSizeHeigth').value,
+                        float);
+        } else {
+            insertPicture(tempSelection,
+                        document.getElementById('urlInput').value,
+                        document.getElementById('inputSizeWidth').value,
+                        document.getElementById('inputSizeHeigth').value,
+                        float);
+        }
     }
+    else
+        if (isLoadedFromDisk) {
+            var file = loadedFile;
+            if (isSettingsVideo) {
+                var selectedElement = null;
+                if (tempSelection.focusNode.tagName == "BODY")
+                    selectedElement = tempSelection.focusNode;
+                else
+                    selectedElement = tempSelection.focusNode.parentNode;
+                var temp1 = document.createElement('br');
+                selectedElement.appendChild(temp1);
+                var Video = document.createElement('video');
+                Video.setAttribute("width", document.getElementById('inputSizeWidth').value);
+                Video.setAttribute("height", document.getElementById('inputSizeHeigth').value);
+                Video.setAttribute("src", "../resources/Media/" + file);
+                Video.setAttribute("controls", "");
+                Video.style.float = float;
+
+                selectedElement.appendChild(Video);
+                var Doc = (isGecko) ? Video.contentDocument : Video.document;
+                Video.designMode = "off";
+                selectedElement.appendChild(temp1);
+            }
+            else {
+                var Picture = document.createElement('img');
+                Picture.setAttribute("width", document.getElementById('inputSizeWidth').value);
+                Picture.setAttribute("height", document.getElementById('inputSizeHeigth').value);
+                Picture.setAttribute("src", "../resources/Media/" + file);
+                Picture.style.float = float;
+                var selectedElement = null;
+                if (tempSelection.focusNode.tagName == "BODY")
+                    selectedElement = tempSelection.focusNode;
+                else
+                    selectedElement = tempSelection.focusNode.parentNode;
+                selectedElement.appendChild(Picture);
+                var Doc = (isGecko) ? Picture.contentDocument : Picture.document;
+                Picture.designMode = "off";
+            }
+        }
     document.getElementById('settingsForm').style.display = 'none';
+    document.getElementById('cover').style.display = 'none';
+}
+
+function loadContent() {
+    document.getElementById("selectFile").click();
+}
+
+function loadOnServer() {
+    var file = document.getElementById("selectFile").value;
+    var temp = '';
+    for (var i = file.length - 1; file[i] != '\\'; i--) {
+        temp += file[i];
+    }
+    file = '';
+    for (var i = temp.length - 1; i >= 0; i--) {
+        file += temp[i];
+    }
+    var type = document.getElementById("selectFile").files[0].type;
+    var image = false;
+    if (!isSettingsVideo) {
+        if (-1 < type.indexOf('image')) {
+            document.getElementById("SubmitSingle").click();
+            image = true;
+            isLoadedFromDisk = true;
+        }
+        else {
+            alert("Was required the image file!");
+        }
+    }
+    if (isSettingsVideo) {
+        if (-1 < type.indexOf('video')) {
+            document.getElementById("SubmitSingle").click();
+            image = false;
+            isLoadedFromDisk = true;
+        }
+        else {
+            alert("Was required the video file!");
+        }
+    }
+    isImage = image;
+    if (document.getElementById("selectFile").value != "" && isLoadedFromDisk) {
+        loadedFile = file;
+        document.getElementById("selectFile").value = "";
+    }
+    else {
+        document.getElementById("selectFile").value = "";
+    }
+    getSizeOfImage();
+}
+
+function getSizeOfImage() {
+    if (!isImage || !isLoadedFromDisk) return;
+    var url = "../resources/Media/" + loadedFile;
+    //var xmlhttp = getXmlHttp();
+    //while (xmlhttp.status != 200) {
+    //    xmlhttp.open('GET', url, false);
+    //    xmlhttp.send(null);
+    //}
+    var image = new Image();
+    image.src = url;
+    image.onload = function () {
+        document.getElementById('inputSizeWidth').value = image.width;
+        document.getElementById('inputSizeHeigth').value = image.height;
+    }
+}
+
+function getXmlHttp() {
+    var xmlhttp;
+    try {
+        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+        try {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } catch (E) {
+            xmlhttp = false;
+        }
+    }
+    if (!xmlhttp && typeof XMLHttpRequest != 'undefined') {
+        xmlhttp = new XMLHttpRequest();
+    }
+    return xmlhttp;
 }
 
 function closeSettings() {

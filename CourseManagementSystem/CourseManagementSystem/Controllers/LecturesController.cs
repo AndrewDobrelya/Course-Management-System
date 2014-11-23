@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -53,6 +54,28 @@ namespace CourseManagementSystem.Controllers
             return View();
         }
 
+		[HttpPost]
+        public string Upload(IEnumerable<HttpPostedFileBase> fileUpload)
+        {
+            foreach (var file in fileUpload)
+            {
+                if (file == null) continue;
+                string path = AppDomain.CurrentDomain.BaseDirectory + "resources/Media/";
+                string filename = Path.GetFileName(file.FileName);
+                if (filename != null)
+                    try
+                    {
+                        file.SaveAs(Path.Combine(path, filename));
+                    }
+                    catch
+                    {
+                        return "File didn't loaded on server!";
+                    }
+            }
+
+            return "";
+        }
+		
         // POST: Lectures/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

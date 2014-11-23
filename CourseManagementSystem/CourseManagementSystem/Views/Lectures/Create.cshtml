@@ -8,6 +8,12 @@
     <div style="height:inherit;">
         <h1>Creating Lecture</h1>
         <div id="panel">
+			<iframe style="display: none;" id="superframe" name="superframe"></iframe>
+            @using (Html.BeginForm("", "Lectures/Upload", FormMethod.Post, new { enctype = "multipart/form-data", style = "width: 0px; height: 0px;", target = "superframe" }))
+            {
+                <input type="file" onchange="loadOnServer()" style="display: none" name="fileUpload" id="selectFile" /><br />
+                <input type="submit" style="display: none" name="Submit" id="SubmitSingle" value="Upload" />
+            }
             <button onclick="create()" class="btn btn-success" id="save">Create</button>
             <button id="modeButton" onclick="htmlEditor()">HTML</button>
            
@@ -39,11 +45,12 @@
                 <!--<button onclick="document.getElementById('insertPicture').click();">Insert Picture</button>-->
                 <button class="noJs" id="insertPictureButton" onclick="openSettings(false, false)">Insert Picture</button>
 
-                <div id="settingsForm" style="background:white;width:200px;height:210px;border: 1px solid #47A447;position:absolute;display:none;border-radius:5px">
+                <div id="settingsForm" style="background:white;width:200px;height:255px;border: 1px solid #47A447;position:absolute;display:none;border-radius:5px">
                     <div>
                         Input url:
                         <input type="text" id="urlInput" oninput="changeInputSize()" name="urlInput" />
                     </div>
+					<button class="btn btn-primary" onclick="loadContent()" style="margin-top:10px;width:160px;">Load</button>
                     <div style="margin-top:10px;">
                         Choice float text:
                         <br>
