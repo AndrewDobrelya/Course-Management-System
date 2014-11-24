@@ -6,9 +6,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Usr</h2>
-@ViewBag.loginProfile
+<h2>@ViewBag.loginProfile</h2>
+@{float sum = 0; int count = 0; float result = 0;}
 @foreach (var item in Model)
 {
-    @item.mark
+    sum += item.mark;
+    count++;
 }
+@{
+    if (count != 0)
+    {
+        result = sum / count;
+    }
+}
+@result
