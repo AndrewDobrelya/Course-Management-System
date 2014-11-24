@@ -1,0 +1,42 @@
+﻿@model List<CourseManagementSystem.Models.Mark>
+
+
+@{
+    ViewBag.Title = "Details";
+    List<CourseManagementSystem.Models.Lecture>
+        lectures = ViewBag.Lectures;
+    int counter = 0;
+}
+
+@*<div class="col-md-4 " style="border-right:1px solid #eeeeee">*@
+<h2>О курсе</h2>
+
+<div style="padding-top:10px">
+
+    @foreach (var item in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayFor(modelItem => lectures[counter].Name)
+            </dt>
+
+            <dt>
+                @Html.DisplayFor(modelItem => item.Value)
+            </dt>
+            @{
+        counter++;
+            }
+        </dl>
+
+
+
+
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Вернуться к списку", "Student")
+</p>
+
+@*</div>*@
+

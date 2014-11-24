@@ -508,3 +508,11 @@ C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSy
 C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.dll
 C:\Users\Андрей\Documents\GitHub\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.pdb
 C:\Users\Андрей\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.csprojResolveAssemblyReference.cache
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\bin\ShortGuid.dll
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._6.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._7.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._8.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._9.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._10.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations._11.resources
+C:\Users\Andrew\Documents\GitHub\Course-Management-System\CourseManagementSystem\CourseManagementSystem\obj\Debug\CourseManagementSystem.Migrations.MigrateDB.resources

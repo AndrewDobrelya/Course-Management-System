@@ -32,6 +32,12 @@
                     <li>@Html.ActionLink("Мои курсы", "Teacher", "Course")</li>
                 </ul>
                  }
+                @if (User.IsInRole("student"))
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Мои курсы", "Student", "Mark")</li>
+                    </ul>
+                }
                 @Html.Partial("_LoginPartial")
                 @Html.Partial("_SearchPartial", new CourseManagementSystem.Models.Search())
             </div>

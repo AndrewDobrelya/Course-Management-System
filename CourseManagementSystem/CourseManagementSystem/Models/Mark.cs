@@ -9,9 +9,7 @@ namespace CourseManagementSystem.Models
     {
         public int id { get; set; }
 
-        public ApplicationUser Student { get; set; }
-
-        public Test Test { get; set; }
+        public virtual Subscription Subscription { get; set; }
 
         public int Value { get; set; }
     }
