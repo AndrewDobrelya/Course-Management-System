@@ -1,0 +1,14 @@
+﻿@using CourseManagementSystem.Models
+@model IEnumerable<CourseMark>
+
+@{
+    ViewBag.Title = "Usr";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usr</h2>
+@ViewBag.loginProfile
+@foreach (var item in Model)
+{
+    @item.mark
+}
