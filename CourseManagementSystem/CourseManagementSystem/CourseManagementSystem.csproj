@@ -228,6 +228,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lecture.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Search.cs" />
     <Compile Include="Models\Subscription.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -335,6 +336,9 @@
     <Content Include="Views\Tests\EditList.cshtml" />
     <Content Include="Views\Tests\QuestionsList.cshtml" />
     <Content Include="Views\Tests\Certificate.cshtml" />
+    <Content Include="Views\Course\Search.cshtml" />
+    <Content Include="Views\Shared\_SearchPartial.cshtml" />
+    <Content Include="Views\Account\Manager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -387,6 +391,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411071919106_9.resx">
       <DependentUpon>201411071919106_9.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411172108023_10.resx">
       <DependentUpon>201411172108023_10.cs</DependentUpon>
