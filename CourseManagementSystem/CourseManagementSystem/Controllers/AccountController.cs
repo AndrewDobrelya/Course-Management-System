@@ -334,6 +334,16 @@ namespace CourseManagementSystem.Controllers
             return View(model);
         }
 
+        [Authorize]
+        [AllowAnonymous]
+        public ActionResult Usr(string profile)
+        {
+            //var course = db.Courses.Where(l => l.Author.UserName == profile);
+            var courseMarks = db.CouresMark.Where(l => l.course.Author.UserName == profile);
+            ViewBag.loginProfile = profile;
+            return View(courseMarks.ToList());
+        }
+
         //
         // POST: /Account/ExternalLogin
         [HttpPost]

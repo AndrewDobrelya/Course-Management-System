@@ -219,10 +219,15 @@
     <Compile Include="Migrations\201411172108023_10.Designer.cs">
       <DependentUpon>201411172108023_10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411241220489_11.cs" />
+    <Compile Include="Migrations\201411241220489_11.Designer.cs">
+      <DependentUpon>201411241220489_11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\CourseMark.cs" />
     <Compile Include="Models\Mark.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -338,7 +343,7 @@
     <Content Include="Views\Tests\Certificate.cshtml" />
     <Content Include="Views\Course\Search.cshtml" />
     <Content Include="Views\Shared\_SearchPartial.cshtml" />
-    <Content Include="Views\Account\Manager.cshtml" />
+    <Content Include="Views\Account\Usr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411172108023_10.resx">
       <DependentUpon>201411172108023_10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411241220489_11.resx">
+      <DependentUpon>201411241220489_11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

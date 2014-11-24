@@ -53,6 +53,8 @@ namespace CourseManagementSystem.Models
         public DbSet<ResetToken> ResetToken { get; set; }
 
         public DbSet<Mark> Mark { get; set; }
+
+        public DbSet<CourseMark> CouresMark { get; set; }
     }
 
     public class UniqueEmailAttribute : ValidationAttribute
