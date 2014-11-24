@@ -40,7 +40,9 @@ namespace CourseManagementSystem.Controllers
 
         public ActionResult Search(Search search)
         {
-            var course = db.Courses.Where(l => l.name == search.keywords && l.Category.id == search.category_id);
+            ViewBag.Keywords = search.keywords;
+            ViewBag.Category = search.category_id;
+            var course = db.Courses.Where(l => l.name.Contains(search.keywords)  && (search.category_id == 0 || l.Category.id == search.category_id));
             return View(course.ToList());
         }
 
